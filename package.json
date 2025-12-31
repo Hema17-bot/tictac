@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "postinstall": "chmod +x ./node_modules/.bin/vite || true",
     "build": "node ./node_modules/vite/bin/vite.js build",
     "vercel-build": "node ./node_modules/vite/bin/vite.js build",
     "lint": "eslint .",
@@ -15,7 +16,8 @@
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "vite": "^7.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -25,7 +27,6 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "vite": "^7.2.4"
+    "globals": "^16.5.0"
   }
 }
