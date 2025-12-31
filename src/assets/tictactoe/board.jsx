@@ -6,20 +6,23 @@ const Board = () => {
 
     const [state, setstate] = useState(Array(9).fill(null));
     const [isXturn, setIsXturn] = useState(true);
-    
+    const [winner, setWinner] = useState(null);
+
     console.log ("State:", state);
 
     const handleClick = (index) => {
-        if(state[index] !== null){
+        if(winner || state[index] !== null){
             return;
         }
         const copyState=[...state]
         copyState[index]=isXturn?"X":"O";
         setstate(copyState);
-        const winnerFound = checkWinner(copyState);
-        if (winnerFound) {
-            setWinner(isXturn ? "X" : "O");
-        } else {
+        const currentWinner = checkWinner(copyState);
+        if (currentWinner) {
+            setWinner(currentWinner);
+        } else if (copyState.every(square => square !== null)) {
+            setWinner("Draw");
+        }else {
             setIsXturn(!isXturn);
         }
     }
@@ -49,13 +52,13 @@ const Board = () => {
                 return null;
             };
         
-const winner = checkWinner(state);
 
     return ( 
         <div className="board">
             {winner ? (
                 <>
-                <h1>{winner} won the game </h1><button onClick={() => { setstate(Array(9).fill(null)); setWinner(null); setIsXturn(true); }}>play again</button>
+                <h1>{winner === "Draw" ? "It's a Draw!" : `${winner} won the game`} </h1><button onClick={() => { setstate(Array(9).fill(null)); setWinner(null); setIsXturn(true); }}>play again</button>
+                </>
                 </> 
             ):(<>
             <h4> please {isXturn ? "X" : "O"} move</h4>
