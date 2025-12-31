@@ -58,7 +58,6 @@ const Board = () => {
             {winner ? (
                 <>
                 <h1>{winner === "Draw" ? "It's a Draw!" : `${winner} won the game`} </h1><button onClick={() => { setstate(Array(9).fill(null)); setWinner(null); setIsXturn(true); }}>play again</button>
-                </>
                 </> 
             ):(<>
             <h4> please {isXturn ? "X" : "O"} move</h4>
